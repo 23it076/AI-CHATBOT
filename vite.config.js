@@ -24,7 +24,7 @@ export default defineConfig({
     host: true
   },
   build: {
-    outDir: path.resolve(__dirname, "dist", "public"), // Vercel expects /dist or /build
+    outDir: process.env.VERCEL ? path.resolve(__dirname, "dist") : path.resolve(__dirname, "dist", "public"), // Output to dist on Vercel
     emptyOutDir: true
   }
 });
