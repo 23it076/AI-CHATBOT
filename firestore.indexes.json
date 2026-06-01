@@ -1,0 +1,70 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "acpcCutoffs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "district", "order": "ASCENDING" },
+        { "fieldPath": "closingRank", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "acpcCutoffs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "courseName", "order": "ASCENDING" },
+        { "fieldPath": "closingRank", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "acpcCutoffs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "closingRank", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "acpcCutoffs",
+      "fieldPath": "collegeName",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
+      ]
+    },
+    {
+      "collectionGroup": "acpcCutoffs",
+      "fieldPath": "district",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
+      ]
+    },
+    {
+      "collectionGroup": "acpcCutoffs",
+      "fieldPath": "courseName",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
+      ]
+    },
+    {
+      "collectionGroup": "acpcCutoffs",
+      "fieldPath": "category",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
+      ]
+    },
+    {
+      "collectionGroup": "acpcCutoffs",
+      "fieldPath": "closingRank",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
+      ]
+    }
+  ]
+}
