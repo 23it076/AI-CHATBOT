@@ -21,7 +21,28 @@ import { apiRequest } from "./queryClient";
 
 export const getChatCompletion = async (messages) => {
   try {
-    const response = await apiRequest("POST", "/api/chat/completion", { messages });
+    const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+    if (!apiKey) {
+      throw new Error("VITE_GROQ_API_KEY is missing in environment variables.");
+    }
+
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        messages,
+        model: "llama-3.1-8b-instant"
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error?.message || "Failed to get AI response");
+    }
+
     return await response.json();
   } catch (error) {
     console.error("Error getting chat completion:", error);

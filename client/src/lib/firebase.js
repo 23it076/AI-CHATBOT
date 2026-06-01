@@ -53,14 +53,6 @@ password) =>
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Create user in our backend
-    await apiRequest("POST", "/api/users", {
-      username,
-      email,
-      password: "firebase-auth", // We don't store the actual password
-      firebaseId: user.uid
-    });
-
     return user;
   } catch (error) {
     console.error("Error registering with email and password:", error);
@@ -84,19 +76,6 @@ export const loginWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
-
-    // Create user in our backend if they don't exist
-    try {
-      await apiRequest("POST", "/api/users", {
-        username: user.displayName || user.email?.split('@')[0] || 'user',
-        email: user.email || '',
-        password: "firebase-auth", // We don't store the actual password
-        firebaseId: user.uid
-      });
-    } catch (error) {
-      // User might already exist, which is fine
-      console.log("User might already exist in the backend", error);
-    }
 
     return user;
   } catch (error) {
