@@ -61,17 +61,17 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
-                <div className="text-[#4f46e5] font-bold text-2xl flex items-center cursor-pointer tracking-tight hover:opacity-90 transition-opacity">
-                  <div className="bg-[#4f46e5]/10 p-2 rounded-xl mr-2">
-                    <i className="fas fa-robot text-[#4f46e5]"></i>
+                <div className="font-bold text-2xl flex items-center cursor-pointer tracking-tight hover:opacity-90 transition-opacity text-foreground">
+                  <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-xl mr-3 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    <i className="fas fa-graduation-cap text-white"></i>
                   </div>
-                  StudyAI
+                  StudentGuide<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">AI</span>
                 </div>
               </Link>
             </div>
@@ -86,13 +86,13 @@ const Navbar = () => {
                     href={link.href}
                     className={`relative text-sm font-semibold transition-colors duration-200 py-2 ${
                       isActive 
-                        ? "text-[#4f46e5]" 
-                        : "text-gray-600 hover:text-[#4f46e5]"
+                        ? "text-primary" 
+                        : "text-muted-foreground hover:text-primary"
                     }`}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#4f46e5] rounded-full" />
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
                     )}
                   </Link>
                 );
@@ -105,13 +105,13 @@ const Navbar = () => {
                 <>
                   <Button
                     variant="ghost"
-                    className="text-gray-600 font-semibold hover:text-[#4f46e5] hover:bg-[#4f46e5]/5"
+                    className="text-muted-foreground font-semibold hover:text-primary hover:bg-primary/5"
                     onClick={() => handleOpenAuthModal(true)}
                   >
                     Log in
                   </Button>
                   <Button 
-                    className="bg-[#4f46e5] hover:bg-[#4338ca] text-white font-semibold rounded-full px-6 shadow-md shadow-[#4f46e5]/20 transition-all hover:shadow-lg hover:-translate-y-0.5"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full px-6 shadow-md shadow-primary/20 transition-all hover:shadow-lg hover:-translate-y-0.5"
                     onClick={() => handleOpenAuthModal(false)}
                   >
                     Sign up
@@ -120,27 +120,27 @@ const Navbar = () => {
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Avatar className="cursor-pointer border-2 border-transparent hover:border-[#4f46e5] transition-all shadow-sm">
+                    <Avatar className="cursor-pointer border-2 border-transparent hover:border-primary transition-all shadow-sm">
                       <AvatarImage src={currentUser.photoURL || undefined} />
-                      <AvatarFallback className="bg-[#4f46e5] text-white font-semibold">
+                      <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
                         {currentUser.email?.charAt(0).toUpperCase() || "U"}
                       </AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-xl border-gray-100">
-                    <DropdownMenuLabel className="font-semibold text-gray-900">My Account</DropdownMenuLabel>
+                  <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-xl border-border bg-card">
+                    <DropdownMenuLabel className="font-semibold text-foreground">My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <Link href="/profile">
-                      <DropdownMenuItem className="cursor-pointer text-gray-700 hover:text-[#4f46e5] hover:bg-gray-50 focus:text-[#4f46e5] focus:bg-gray-50 rounded-lg">
-                        <i className="fas fa-user w-5 text-center mr-2 text-gray-400"></i>
+                      <DropdownMenuItem className="cursor-pointer text-muted-foreground hover:text-primary hover:bg-muted focus:text-primary focus:bg-muted rounded-lg">
+                        <i className="fas fa-user w-5 text-center mr-2"></i>
                         Profile
                       </DropdownMenuItem>
                     </Link>
                     <DropdownMenuItem 
                       onClick={handleLogout}
-                      className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 focus:text-red-700 focus:bg-red-50 rounded-lg mt-1"
+                      className="cursor-pointer text-destructive hover:text-destructive hover:bg-destructive/10 focus:text-destructive focus:bg-destructive/10 rounded-lg mt-1"
                     >
-                      <i className="fas fa-sign-out-alt w-5 text-center mr-2 text-red-400"></i>
+                      <i className="fas fa-sign-out-alt w-5 text-center mr-2"></i>
                       Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -154,7 +154,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={toggleMobileMenu}
-                className="text-gray-500 hover:text-[#4f46e5] hover:bg-gray-100 rounded-xl"
+                className="text-muted-foreground hover:text-primary hover:bg-muted rounded-xl"
               >
                 <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} h-5 w-5`}></i>
               </Button>
@@ -163,8 +163,8 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-96 border-b border-gray-100" : "max-h-0"}`}>
-          <div className="px-4 pt-2 pb-6 bg-white space-y-1 shadow-inner">
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-96 border-b border-border" : "max-h-0"}`}>
+          <div className="px-4 pt-2 pb-6 bg-background space-y-1 shadow-inner">
             {navLinks.map((link) => {
               const isActive = location === link.href || (link.href !== '/' && location.startsWith(link.href));
               return (
@@ -173,8 +173,8 @@ const Navbar = () => {
                   href={link.href}
                   className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors ${
                     isActive 
-                      ? "bg-[#4f46e5]/10 text-[#4f46e5]" 
-                      : "text-gray-600 hover:bg-gray-50 hover:text-[#4f46e5]"
+                      ? "bg-primary/10 text-primary" 
+                      : "text-muted-foreground hover:bg-muted hover:text-primary"
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -183,12 +183,12 @@ const Navbar = () => {
               );
             })}
             
-            <div className="mt-6 pt-6 border-t border-gray-100">
+            <div className="mt-6 pt-6 border-t border-border">
               {!currentUser ? (
                 <div className="grid grid-cols-2 gap-4">
                   <Button
                     variant="outline"
-                    className="w-full justify-center rounded-xl font-semibold border-gray-200 text-gray-700"
+                    className="w-full justify-center rounded-xl font-semibold border-border text-foreground hover:bg-muted"
                     onClick={() => {
                       handleOpenAuthModal(true);
                       setMobileMenuOpen(false);
@@ -197,7 +197,7 @@ const Navbar = () => {
                     Log in
                   </Button>
                   <Button
-                    className="w-full justify-center bg-[#4f46e5] hover:bg-[#4338ca] text-white font-semibold rounded-xl"
+                    className="w-full justify-center bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl"
                     onClick={() => {
                       handleOpenAuthModal(false);
                       setMobileMenuOpen(false);
@@ -211,22 +211,22 @@ const Navbar = () => {
                   <Link href="/profile">
                     <Button
                       variant="ghost"
-                      className="w-full justify-start rounded-xl font-semibold text-gray-600 hover:bg-gray-50"
+                      className="w-full justify-start rounded-xl font-semibold text-muted-foreground hover:bg-muted hover:text-foreground"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <i className="fas fa-user w-5 mr-3 text-gray-400"></i>
+                      <i className="fas fa-user w-5 mr-3"></i>
                       Profile
                     </Button>
                   </Link>
                   <Button
                     variant="ghost"
-                    className="w-full justify-start rounded-xl font-semibold text-red-600 hover:bg-red-50 hover:text-red-700"
+                    className="w-full justify-start rounded-xl font-semibold text-destructive hover:bg-destructive/10 hover:text-destructive"
                     onClick={() => {
                       handleLogout();
                       setMobileMenuOpen(false);
                     }}
                   >
-                    <i className="fas fa-sign-out-alt w-5 mr-3 text-red-400"></i>
+                    <i className="fas fa-sign-out-alt w-5 mr-3"></i>
                     Log out
                   </Button>
                 </div>

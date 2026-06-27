@@ -1,6 +1,6 @@
 # StudentGuideAI - Educational Assistant
 
-An AI-powered educational assistant focused on helping students with Gujarat college admissions.
+An AI-powered educational assistant focused on helping students with Gujarat college admissions, featuring a premium modern SaaS dark-theme UI with a blue-to-purple gradient brand identity.
 
 ## Features
 
