@@ -10,7 +10,7 @@ import {
   updateProfile as firebaseUpdateProfile } from
 
 "firebase/auth";
-import { getFirestore, collection, getDocs, addDoc, query, where, orderBy, serverTimestamp, enableIndexedDbPersistence, writeBatch, doc } from "firebase/firestore";
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, getDocs, addDoc, query, where, orderBy, serverTimestamp, writeBatch, doc } from "firebase/firestore";
 import { apiRequest } from "./queryClient";
 
 const firebaseConfig = {
@@ -29,19 +29,13 @@ try {
   console.error("Firebase initialization error:", error);
 }
 const auth = getAuth(app);
-const db = getFirestore(app);
-const googleProvider = new GoogleAuthProvider();
 
-// Enable offline persistence (helpful for better performance and offline support)
-enableIndexedDbPersistence(db).catch((err) => {
-  if (err.code === 'failed-precondition') {
-    // Multiple tabs open, persistence can only be enabled in one tab at a time
-    console.warn('Firebase persistence failed: multiple tabs open');
-  } else if (err.code === 'unimplemented') {
-    // The current browser does not support all of the features required for persistence
-    console.warn('Firebase persistence not supported by this browser');
-  }
+// Initialize Firestore with persistent cache to avoid deprecation warning
+const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 });
+
+const googleProvider = new GoogleAuthProvider();
 
 // Register user with email and password
 export const registerWithEmailAndPassword = async (
